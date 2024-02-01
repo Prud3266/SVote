@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 function App() {
+  const message = "SVote is a Solana Blockchain-based Voting System.";
+  const link = "http://www.google.com";
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <div className="content">
+          <h1>Welcome to SVote!</h1>
+        <p>{message}</p>
+        <p>Ask <a href={link}>Google</a> More About Us!</p>
+      </div>
+      
     </div>
+    
   );
 }
 
