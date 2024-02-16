@@ -1,33 +1,58 @@
-import Footer from './Footer';
+import Footer from './Components/Footer';
+import { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Home from './Pages/Home';
+import Landing from './Pages/Landing';
+import Voters from './Pages/Voters';
+import VotersRegistered from './Pages/VotersRegistered';
+import VotersRegistering from './Pages/VotersRegistering';
 
 function App() {
-  const message = "SVote is a Solana Blockchain-based Voting System.";
+  // let message = "SVote is a Solana Blockchain-based Voting System.";
+  const [message, setMessage] = useState('SVote is a Solana Blockchain-based Voting System.');
+  const [times, setTimes] = useState('');
   const link = "http://www.google.com";
+  const handleClick = () => {
+    setMessage('SVote Rock!');
+    setTimes('23 times');
+  }
 
   return (
-    <div className="App">
-      <nav className="navbar">
-            <a href="/"><h1>SVote</h1></a>
-            <div className="links">
-              <a href="/" style={{
-                color: 'white',
-                backgroundColor: '#007bff',
-                borderRadius: '16px'
-              }}>Connect Wallet</a>
-            </div>
+    <Router>
+      <div className="App">
+        <nav className="navbar">
+              <Link to="/"><h1>SVote</h1></Link>
+              <div className="links">
+                <Link to="/landingpage" style={{
+                  color: 'white',
+                  backgroundColor: '#007bff',
+                  borderRadius: '16px'
+                }}>Connect Wallet</Link>
+              </div>
         </nav>
-      <div className="content">
-        <h1>Welcome to SVote!</h1>
-        <button style={{
-                color: 'white',
-                backgroundColor: '#007bff',
-                borderRadius: '8px'
-              }}>Connect Wallet</button>
-        <p>{message}</p>
-        <p>Ask <a href={link}>Google</a> For More About Us!</p>
-      </div>      
-      <Footer></Footer>
-    </div>
+        <div className="content">
+          <Switch>
+            <Route exact path='/'>
+              <Home handleClick={handleClick} message={message} link={link} times={times} />
+            </Route>
+            <Route path='/landingpage'>
+              <Landing />
+            </Route>
+            <Route path='/Voters'>
+              <Voters />
+            </Route>
+            <Route>
+              <VotersRegistered />
+            </Route>
+            <Route>
+              <VotersRegistering />
+            </Route>
+          </Switch>        
+        </div>      
+        <Footer></Footer>
+      </div>
+    </Router>
+    
     
   );
 }
