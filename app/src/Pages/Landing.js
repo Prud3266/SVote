@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 const Landing = () => {
     return ( 
         <div>
-            <Link to='/Voters'>Voters</Link><br />
-            <Link to='/Elections'>Elections</Link>
+            <Link to='/voters'>Voters</Link><br />
+            <Link to='/elections'>Elections</Link>
         </div>
      );
 }

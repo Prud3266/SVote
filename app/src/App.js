@@ -6,6 +6,11 @@ import Landing from './Pages/Landing';
 import Voters from './Pages/Voters';
 import VotersRegistered from './Pages/VotersRegistered';
 import VotersRegistering from './Pages/VotersRegistering';
+import Elections from './Pages/Elections';
+import CreateElections from './Pages/createElection';
+import ActivateElections from './Pages/activateElection';
+import CheckResults from './Pages/checkResults';
+import PublishedResults from './Pages/publishedResult';
 
 function App() {
   // let message = "SVote is a Solana Blockchain-based Voting System.";
@@ -38,15 +43,31 @@ function App() {
             <Route path='/landingpage'>
               <Landing />
             </Route>
-            <Route path='/Voters'>
+            <Route exact path='/voters'>
               <Voters />
             </Route>
-            <Route>
+            <Route exact path='/votersRegistered'>
               <VotersRegistered />
             </Route>
-            <Route>
+            <Route path='/votersRegistering'>
               <VotersRegistering />
             </Route>
+            <Route path='/elections'>
+              <Elections />
+            </Route>
+            <Route path='/createelections'>
+              <CreateElections />
+            </Route>
+            <Route path='/activateelections'>
+              <ActivateElections />
+            </Route>
+            <Route path='/checkresults'>
+              <CheckResults />
+            </Route>
+            <Route path='/publishedresults'>
+              <PublishedResults />
+            </Route>
+            
           </Switch>        
         </div>      
         <Footer></Footer>

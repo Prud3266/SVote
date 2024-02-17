@@ -1,6 +1,6 @@
 const Home = ({ link, message, times, handleClick}) => {
     return ( 
-        <div className="home-content">
+        <div className="content">
             <h1>Welcome to SVote!</h1>
             <button onClick={handleClick} style={{
                 color: 'white',
