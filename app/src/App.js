@@ -1,8 +1,8 @@
 import Footer from './Components/Footer';
 import { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import Home from './Pages/Home';
-import Landing from './Pages/Landing';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './Pages/Landing';
+import Landing from './Pages/Home';
 import Voters from './Pages/Voters';
 import VotersRegistered from './Pages/VotersRegistered';
 import VotersRegistering from './Pages/VotersRegistering';
@@ -25,7 +25,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav className="navbar">
+        {/* <nav className="navbar">
               <Link to="/"><h1>SVote</h1></Link>
               <div className="links">
                 <Link to="/landingpage" style={{
@@ -34,7 +34,7 @@ function App() {
                   borderRadius: '16px'
                 }}>Connect Wallet</Link>
               </div>
-        </nav>
+        </nav> */}
         <div className="content">
           <Switch>
             <Route exact path='/'>
