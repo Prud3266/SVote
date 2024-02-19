@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Landing = () => {
+const VoterHome = () => {
     return ( 
         <div>
             <nav className="navbar">
@@ -12,15 +12,15 @@ const Landing = () => {
                   borderRadius: '16px'
                 }}>Connect Wallet</Link>
               </div>
-        </nav>
-        <div>
-          <h1>Welcome Admin to your account</h1>
-            <Link to='/voters'>Voters</Link><br />
-            <Link to='/elections'>Elections</Link>
-        </div>
-        </div>
-        
+            </nav>
+            <div>
+              <h1>Welcome to your votering account</h1>
+              <Link to='/register'>Register</Link><br />
+              <Link to='/voterelections'>Elections</Link>
+            </div>
+        </div>   
+    
      );
 }
  
-export default Landing;
+export default VoterHome;

@@ -11,6 +11,11 @@ import CreateElections from './Pages/createElection';
 import ActivateElections from './Pages/activateElection';
 import CheckResults from './Pages/checkResults';
 import PublishedResults from './Pages/publishedResult';
+import VoterHome from './Pages/VoterHome';
+import Register from './Pages/register';
+import VoterElections from './Pages/voterElection';
+import ActivatedElections from './Pages/activatedElections';
+
 
 function App() {
   // let message = "SVote is a Solana Blockchain-based Voting System.";
@@ -67,7 +72,17 @@ function App() {
             <Route path='/publishedresults'>
               <PublishedResults />
             </Route>
-            
+            <Route path='/home'>
+              <VoterHome />
+            </Route><Route path='/register'>
+              <Register />
+            </Route>
+            <Route path='/voterelections'>
+              <VoterElections />
+            </Route>
+            <Route path='/activatedelections'>
+              <ActivatedElections />
+            </Route>
           </Switch>        
         </div>      
         <Footer></Footer>

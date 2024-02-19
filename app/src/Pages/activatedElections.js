@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Landing = () => {
+const ActivatedElections = () => {
     return ( 
         <div>
             <nav className="navbar">
@@ -13,14 +13,12 @@ const Landing = () => {
                 }}>Connect Wallet</Link>
               </div>
         </nav>
-        <div>
-          <h1>Welcome Admin to your account</h1>
-            <Link to='/voters'>Voters</Link><br />
-            <Link to='/elections'>Elections</Link>
+        <div className="contents">            
+            <h1>Activated Elections</h1>
         </div>
         </div>
-        
+     
      );
 }
  
-export default Landing;
+export default ActivatedElections;
