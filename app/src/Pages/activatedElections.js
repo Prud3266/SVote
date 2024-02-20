@@ -12,7 +12,7 @@ const ActivatedElections = () => {
                   borderRadius: '16px'
                 }}>Connect Wallet</Link>
               </div>
-        </nav>
+            </nav>
         <div className="contents">            
             <h1>Activated Elections</h1>
         </div>

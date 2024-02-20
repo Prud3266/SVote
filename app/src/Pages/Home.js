@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Landing = () => {
+const Home = () => {
     return ( 
         <div>
             <nav className="navbar">
@@ -23,4 +23,4 @@ const Landing = () => {
      );
 }
  
-export default Landing;
+export default Home;

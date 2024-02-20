@@ -74,7 +74,8 @@ function App() {
             </Route>
             <Route path='/home'>
               <VoterHome />
-            </Route><Route path='/register'>
+            </Route>
+            <Route path='/register'>
               <Register />
             </Route>
             <Route path='/voterelections'>
