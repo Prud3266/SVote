@@ -21,6 +21,7 @@ mod svote {
         pub identity_hash: Vec<u8>,
         pub phone_hash: Vec<u8>,
         pub has_voted: bool,
+        pub vote_count: u32, // Added field for vote count
     }
 
     #[derive(Accounts)]
@@ -88,10 +89,12 @@ mod svote {
     
         Ok(())
     }
-    
 
     pub fn activate_election(ctx: Context<ActivateElection>) -> ProgramResult {
         let election = &mut ctx.accounts.election;
+        if election.registered_voters.is_empty() {
+            return Err(ErrorCode::NoRegisteredVoters.into());
+        }
         election.is_active = true;
         Ok(())
     }
@@ -101,7 +104,7 @@ mod svote {
         let voter_id = hash_identity_and_phone(
             &ctx.accounts.voter.key.to_bytes(),
             &b"",
-            &b"", // You may modify this part to include actual identity and phone data
+            &b"",
         );
 
         election.registered_voters.insert(
@@ -110,6 +113,7 @@ mod svote {
                 identity_hash: Vec::new(),
                 phone_hash: Vec::new(),
                 has_voted: false,
+                vote_count: 0, // Initialize vote count to 0
             },
         );
 
@@ -118,7 +122,7 @@ mod svote {
 
     pub fn add_candidate(ctx: Context<AddCandidate>, candidate_id: u64, name: String) -> ProgramResult {
         let election = &mut ctx.accounts.election;
-        if candidate_id < 2 || candidate_id > 7 {
+        if candidate_id < 2 || candidate_id > 8 {
             return Err(ErrorCode::InvalidCandidateId.into());
         }
 
@@ -131,7 +135,7 @@ mod svote {
         let voter_id = hash_identity_and_phone(
             &ctx.accounts.voter.key.to_bytes(),
             &b"",
-            &b"", // You may modify this part to include actual identity and phone data
+            &b"",
         );
 
         // Check if the voter is registered
@@ -155,6 +159,9 @@ mod svote {
         // Update the vote count for the candidate
         let vote_count = election.votes.entry(candidate_id).or_insert(0);
         *vote_count += 1;
+
+        // Increment the voter's vote count
+        voter.vote_count += 1;
 
         // Mark the voter as voted
         voter.has_voted = true;
@@ -191,7 +198,10 @@ mod svote {
         #[msg("Voter has already voted")]
         VoterAlreadyVoted,
 
-        #[msg("Invalid candidate ID, must be between 2 and 7")]
+        #[msg("Invalid candidate ID, must be between 2 and 8")]
         InvalidCandidateId,
+
+        #[msg("No voters are registered for the election")]
+        NoRegisteredVoters,
     }
 }
