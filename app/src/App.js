@@ -3,17 +3,14 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Pages/Landing';
 import Landing from './Pages/Home';
-import Voters from './Pages/Voters';
 import VotersRegistered from './Pages/VotersRegistered';
 import VotersRegistering from './Pages/VotersRegistering';
-import Elections from './Pages/Elections';
 import CreateElections from './Pages/createElection';
 import ActivateElections from './Pages/activateElection';
 import CheckResults from './Pages/checkResults';
 import PublishedResults from './Pages/publishedResult';
 import VoterHome from './Pages/VoterHome';
 import Register from './Pages/register';
-import VoterElections from './Pages/voterElection';
 import ActivatedElections from './Pages/activatedElections';
 
 
@@ -48,17 +45,11 @@ function App() {
             <Route path='/landingpage'>
               <Landing />
             </Route>
-            <Route exact path='/voters'>
-              <Voters />
-            </Route>
             <Route exact path='/votersRegistered'>
               <VotersRegistered />
             </Route>
             <Route path='/votersRegistering'>
               <VotersRegistering />
-            </Route>
-            <Route path='/elections'>
-              <Elections />
             </Route>
             <Route path='/createelections'>
               <CreateElections />
@@ -77,9 +68,6 @@ function App() {
             </Route>
             <Route path='/register'>
               <Register />
-            </Route>
-            <Route path='/voterelections'>
-              <VoterElections />
             </Route>
             <Route path='/activatedelections'>
               <ActivatedElections />

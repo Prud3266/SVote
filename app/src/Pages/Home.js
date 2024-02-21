@@ -15,8 +15,12 @@ const Home = () => {
         </nav>
         <div>
           <h1>Welcome Admin to your account</h1>
-            <Link to='/voters'>Voters</Link><br />
-            <Link to='/elections'>Elections</Link>
+            <Link to='/votersRegistered'>Registered Voters</Link><br />
+            <Link to='/votersRegistering'>Processing Voters</Link><br />
+            <Link to='/createelections'> Create Elections</Link><br />
+            <Link to='/activateelections'> Activate Elections</Link><br />
+            <Link to='/checkresults'> Check Results</Link><br />
+            <Link to='/publishedresults'> Published Results</Link>
         </div>
         </div>
         

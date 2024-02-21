@@ -16,7 +16,9 @@ const VoterHome = () => {
             <div>
               <h1>Welcome to your votering account</h1>
               <Link to='/register'>Register</Link><br />
-              <Link to='/voterelections'>Elections</Link>
+              <Link to='/activatedelections'> Activated Elections</Link><br />
+              <Link to='/checkresults'> Check Results</Link><br />
+              <Link to='/publishedresults'> Published Results</Link>
             </div>
         </div>   
     
