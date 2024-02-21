@@ -47,15 +47,13 @@ function Home() {
 
   return (
     <div>
-      <nav className="navbar">
+      <nav className="navbar" style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Link to="/"><h1>SVote</h1></Link>
-        <div className="links">
-          <Link to="/landingpage" style={{
-            color: 'white',
-            backgroundColor: '#007bff',
-            borderRadius: '16px'
-          }}>Connect Wallet</Link>
-        </div>
+        <button onClick={handleClick} style={{
+          color: 'white',
+          backgroundColor: '#007bff',
+          borderRadius: '12px'
+        }}>Connect Wallet</button>
       </nav>
       <div className="content">
         <h1>Welcome to SVote!</h1>

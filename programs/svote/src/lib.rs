@@ -13,7 +13,7 @@ mod svote {
         pub name: String,
         pub is_active: bool,
         pub registered_voters: BTreeMap<u64, Voter>,
-        pub votes: HashMap<u64, u32>,
+        pub votes: HashMap<u64, u32>,//What is this doing?
         pub candidates: HashMap<u64, String>,
     }
 
