@@ -44,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/Prud3266/SVote.git",
+  "author": "Jerry",
+  "license": "MIT"
 }
