@@ -7,9 +7,9 @@ import {
   WalletProvider,
   useConnection,
   useWallet,
-  WalletModalProvider,
   WalletMultiButton,
 } from '@solana/wallet-adapter-react';
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
