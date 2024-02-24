@@ -7,7 +7,7 @@ import {
   WalletProvider,
   useConnection,
   useWallet,
-  WalletMultiButton,
+  // WalletMultiButton,
 } from '@solana/wallet-adapter-react';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
@@ -28,7 +28,7 @@ import ActivatedElections from './Pages/activatedElections';
 
 
 function App() {
-  const [balance, setBalance] = useState();
+  const [balance, setBalance] = useState(0);
   const endpoint = web3.clusterApiUrl('devnet');
   const wallets = [new PhantomWalletAdapter()];
 
@@ -52,20 +52,22 @@ function App() {
 
 
   const [message, setMessage] = useState('SVote is a Solana Blockchain-based Voting System.');
+  const [times, setTimes] = useState('');
   const handleClick = () => {
     setMessage('SVote Rock!');
+    setTimes('23 times');
   }
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
+      <WalletProvider wallets={wallets}>
         <WalletModalProvider>
             <Router>
               <div className="App">
                 <div className="content">
                   <Switch>
                     <Route exact path='/'>
-                      <Home handleClick={handleClick} message={message} />
+                      <Home handleClick={handleClick} message={message} times={times} />
                     </Route>
                     <Route path='/landingpage'>
                       <Landing />
