@@ -15,6 +15,7 @@ mod svote {
         pub registered_voters: BTreeMap<u64, Voter>,
         pub votes: HashMap<u64, u32>,//What is this doing?
         pub candidates: HashMap<u64, String>,
+        pub published_results: Option<HashMap<u64, u32>>,
     }
 
     pub struct Voter {
@@ -65,6 +66,18 @@ mod svote {
     pub struct GetElections<'info> {
         #[account(mut)]
         pub elections: Vec<AccountInfo<'info>>,
+    }
+
+    #[derive(Accounts)]
+    pub struct PublishResults<'info> {
+        #[account(mut)]
+        pub election: Account<'info, Election>,
+    }
+
+    #[derive(Accounts)]
+    pub struct GetResults<'info> {
+        #[account(mut)]
+        pub election: Account<'info, Election>,
     }
 
     pub fn create_election(
@@ -176,7 +189,45 @@ mod svote {
         }
         Ok(())
     }
-
+// 
+    pub fn publish_results(ctx: Context<PublishResults>) -> ProgramResult {
+        let election = &mut ctx.accounts.election;
+        
+        // Check if the election is active
+        if !election.is_active {
+            return Err(ErrorCode::ElectionNotActive.into());
+        }
+    
+        // Check if results are already published
+        if election.published_results.is_some() {
+            return Err(ErrorCode::ResultsAlreadyPublished.into());
+        }
+    
+        // Publish the results (copy from votes to published_results)
+        election.published_results = Some(election.votes.clone());
+    
+        Ok(())
+    }
+    
+    pub fn get_results(ctx: Context<GetResults>) -> ProgramResult {
+        let election = &ctx.accounts.election;
+    
+        // Check if the election is active
+        if !election.is_active {
+            return Err(ErrorCode::ElectionNotActive.into());
+        }
+    
+        // Check if results are published
+        let results = election.published_results.as_ref().ok_or(ErrorCode::ResultsNotPublished)?;
+    
+        // Do something with the published results
+        for (candidate_id, vote_count) in results.iter() {
+            return results
+        }
+    
+        Ok(())
+    }
+    
     // Hash function for generating a unique voter ID
     fn hash_identity_and_phone(identity: &[u8], phone: &[u8], election_name: &[u8]) -> u64 {
         let combined_data: Vec<u8> = identity.iter().chain(phone.iter()).chain(election_name.iter()).cloned().collect();
@@ -203,5 +254,11 @@ mod svote {
 
         #[msg("No voters are registered for the election")]
         NoRegisteredVoters,
-    }
+
+        #[msg("Results are already published for the election")]
+        ResultsAlreadyPublished,
+
+        #[msg("Results are not yet published for the election")]
+        ResultsNotPublished,
+        }
 }

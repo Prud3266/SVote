@@ -28,7 +28,7 @@ import ActivatedElections from './Pages/activatedElections';
 
 
 function App() {
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState();
   const endpoint = web3.clusterApiUrl('devnet');
   const wallets = [new PhantomWalletAdapter()];
 
@@ -52,22 +52,20 @@ function App() {
 
 
   const [message, setMessage] = useState('SVote is a Solana Blockchain-based Voting System.');
-  const [times, setTimes] = useState('');
   const handleClick = () => {
     setMessage('SVote Rock!');
-    setTimes('23 times');
   }
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets}>
+      <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
             <Router>
               <div className="App">
                 <div className="content">
                   <Switch>
                     <Route exact path='/'>
-                      <Home handleClick={handleClick} message={message} times={times} />
+                      <Home handleClick={handleClick} message={message} />
                     </Route>
                     <Route path='/landingpage'>
                       <Landing />

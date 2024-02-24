@@ -1,18 +1,56 @@
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Connection, Keypair, PublicKey, Transaction, TransactionInstruction, sendAndConfirmTransaction } from '@solana/web3.js';
 
 const CreateElections = ({ onSubmit }) => {
   const [electionName, setElectionName] = useState('');
   const [electionInfo, setElectionInfo] = useState('');
-  const [numCandidates, setNumCandidates] = useState(0);
+  const [numCandidates, setNumCandidates] = useState();
   const [candidateNames, setCandidateNames] = useState(Array(numCandidates).fill(''));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Creating Election')
-    // Pass the form data to the parent component
-    console.log({ electionName, electionInfo });
+    // console.log('Creating Election')
+    // console.log({ electionName, electionInfo });
+
+    
+    // Establish a connection to the Solana devnet (replace with your network details)
+    const connection = new Connection('https://api.devnet.solana.com', 'confirmed');
+
+    // Replace the following with the address of your deployed smart contract
+    const programId = new PublicKey('YOUR_PROGRAM_ID');
+
+    // Replace the following with the public key of the account that will execute the transaction
+    const fromPubkey = new PublicKey('YOUR_FROM_PUBLIC_KEY');
+
+    // Create an account to store the election data on the Solana blockchain
+    const electionAccount = new Keypair();
+
+    // Your smart contract's instruction data (adjust based on your contract)
+    const data = Buffer.from(JSON.stringify({ electionName, electionInfo, numCandidates, candidateNames }));
+
+    // Create a transaction instruction
+    const instruction = new TransactionInstruction({
+      programId,
+      keys: [
+        { pubkey: fromPubkey, isSigner: true, isWritable: false },
+        { pubkey: electionAccount.publicKey, isSigner: false, isWritable: true },
+        // Add any other keys as needed by your smart contract
+      ],
+      data,
+    });
+
+    // Create and sign a transaction
+    const transaction = new Transaction().add(instruction);
+    const signedTransaction = await window.solana.signTransaction(transaction);
+
+    // Send the transaction to the Solana blockchain
+    await sendAndConfirmTransaction(connection, signedTransaction);
+
+    // Optionally, you can redirect the user or perform other actions after the transaction is confirmed
+    console.log('Election created successfully!');
+   
   };
 
   const handleNumCandidatesChange = (e) => {
@@ -39,6 +77,7 @@ const CreateElections = ({ onSubmit }) => {
     // Redirect to the home page
     window.location.href = '/';
   }
+
   return (
 
     <div>
